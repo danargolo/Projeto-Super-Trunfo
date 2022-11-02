@@ -13,6 +13,7 @@ class Form extends React.Component {
           <input
             type="text"
             id="name"
+            name="name"
             data-testid="name-input"
             value={ cardName }
             onChange={ onInputChange }
@@ -23,6 +24,7 @@ class Form extends React.Component {
           <input
             type="textarea"
             id="description"
+            name="description"
             data-testid="description-input"
             value={ cardDescription }
             onChange={ onInputChange }
@@ -33,6 +35,7 @@ class Form extends React.Component {
           <input
             type="number"
             id="number"
+            name="number1"
             data-testid="attr1-input"
             value={ cardAttr1 }
             onChange={ onInputChange }
@@ -40,6 +43,7 @@ class Form extends React.Component {
           <input
             type="number"
             id="number"
+            name="number2"
             data-testid="attr2-input"
             value={ cardAttr2 }
             onChange={ onInputChange }
@@ -47,6 +51,7 @@ class Form extends React.Component {
           <input
             type="number"
             id="number"
+            name="number3"
             data-testid="attr3-input"
             value={ cardAttr3 }
             onChange={ onInputChange }
@@ -57,6 +62,7 @@ class Form extends React.Component {
           <input
             type="text"
             id="image"
+            name="image"
             data-testid="image-input"
             value={ cardImage }
             onChange={ onInputChange }
@@ -66,6 +72,7 @@ class Form extends React.Component {
           Raridade
           <select
             id="rare"
+            name="rare"
             data-testid="rare-input"
             value={ cardRare }
             onChange={ onInputChange }
@@ -78,6 +85,7 @@ class Form extends React.Component {
         <input
           type="checkbox"
           id="trunfo"
+          name="trunfo"
           data-testid="trunfo-input"
           checked={ cardTrunfo }
           onChange={ onInputChange }
@@ -85,6 +93,7 @@ class Form extends React.Component {
         <button
           type="button"
           id="save"
+          name="save"
           data-testid="save-button"
           disabled={ isSaveButtonDisabled }
           onClick={ onSaveButtonClick }

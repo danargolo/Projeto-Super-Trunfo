@@ -44,8 +44,33 @@ class App extends React.Component {
     this.setState({ isSaveButtonDisabled: !validator });
   };
 
-  onSaveButtonClick = (event) => {
-    console.log(event.target);
+  onSaveButtonClick = () => {
+    const { cardName, cardDescription, cardRare, cardImage, cardAttr1,
+      cardAttr2, cardAttr3, cardTrunfo } = this.state;
+
+    const object = {
+      cardName,
+      cardDescription,
+      cardImage,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardRare,
+      cardTrunfo,
+    };
+
+    this.setState({
+      cardName: '',
+      cardDescription: '',
+      cardImage: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardRare: 'normal',
+      cardTrunfo: false,
+      isSaveButtonDisabled: true,
+    });
+    console.log(object);
   };
 
   render() {

@@ -48,6 +48,8 @@ class Form extends React.Component {
             id="number"
             name="cardAttr2"
             data-testid="attr2-input"
+            min="0"
+            max="90"
             value={ cardAttr2 }
             onChange={ onInputChange }
           />

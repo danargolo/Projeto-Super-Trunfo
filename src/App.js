@@ -83,6 +83,18 @@ class App extends React.Component {
     return trunfoValidator;
   };
 
+  onDeleteClick = (element) => {
+    const { savedCards } = this.state;
+    const { id } = element.target;
+
+    const newSavedCards = savedCards.filter((card, index) => index !== Number(id));
+    this.setState({ savedCards: newSavedCards });
+
+    if (savedCards[Number(id)].cardTrunfo) {
+      this.setState({ hasTrunfo: false });
+    }
+  };
+
   render() {
     const { cardName, cardDescription,
       cardAttr1, cardAttr2, cardAttr3, cardImage, cardRare,
@@ -115,12 +127,15 @@ class App extends React.Component {
             cardAttr3={ cardAttr3 }
             cardRare={ cardRare }
             cardTrunfo={ cardTrunfo }
+            checker="preview"
+            id={ 0 }
+            onDeleteClick={ this.onDeleteClick }
           />
-          <div>
+          <div className="deck">
             {
-              savedCards.map((card) => (
+              savedCards.map((card, index) => (
                 <Card
-                  key={ card.cardName }
+                  key={ index }
                   cardName={ card.cardName }
                   cardDescription={ card.cardDescription }
                   cardImage={ card.cardImage }
@@ -129,6 +144,9 @@ class App extends React.Component {
                   cardAttr3={ card.cardAttr3 }
                   cardRare={ card.cardRare }
                   cardTrunfo={ card.cardTrunfo }
+                  checker="deck"
+                  id={ index }
+                  onDeleteClick={ this.onDeleteClick }
                 />
               ))
             }

@@ -17,7 +17,8 @@ class App extends React.Component {
     isSaveButtonDisabled: true,
     savedCards: [],
     hasTrunfo: false,
-    filterName: '',
+    nameFilter: '',
+    rareFilter: 'todas',
   };
 
   onInputChange = (event) => {
@@ -101,10 +102,12 @@ class App extends React.Component {
     const { cardName, cardDescription,
       cardAttr1, cardAttr2, cardAttr3, cardImage, cardRare,
       cardTrunfo, hasTrunfo, isSaveButtonDisabled, savedCards,
-      filterName } = this.state;
+      nameFilter, rareFilter } = this.state;
 
-    const filteredCards = savedCards.filter((cards) => (
-      cards.cardName.includes(filterName)));
+    const filteredName = savedCards.filter((card) => (
+      card.cardName.includes(nameFilter)));
+    const filteredRare = filteredName.filter((card) => (
+      card.cardRare === rareFilter || rareFilter === 'todas'));
 
     return (
       <div>
@@ -139,12 +142,13 @@ class App extends React.Component {
             onDeleteClick={ this.onDeleteClick }
           />
           <Filters
-            filterName={ filterName }
+            nameFilter={ nameFilter }
+            rareFilter={ rareFilter }
             onInputChange={ this.onInputChange }
           />
           <div className="deck">
             {
-              filteredCards.map((card, index) => (
+              filteredRare.map((card, index) => (
                 <Card
                   key={ index }
                   cardName={ card.cardName }

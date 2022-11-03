@@ -19,14 +19,24 @@ class App extends React.Component {
     hasTrunfo: false,
     nameFilter: '',
     rareFilter: 'todas',
+    trunfoFilter: false,
+    disabled: false,
   };
 
   onInputChange = (event) => {
-    const { name } = event.target;
-    const value = name === 'cardTrunfo' ? event.target.checked : event.target.value;
-    this.setState({ [name]: value }, () => {
+    const { name, type, checked, value } = event.target;
+    const val = type === 'checkbox' ? checked : value;
+    this.setState({ [name]: val }, () => {
       this.saveButtonValidator();
+      this.handleTrunfoFilter();
     });
+  };
+
+  handleTrunfoFilter = () => {
+    const { trunfoFilter } = this.state;
+    return trunfoFilter
+      ? this.setState({ disabled: true })
+      : this.setState({ disabled: false });
   };
 
   saveButtonValidator = () => {
@@ -102,12 +112,15 @@ class App extends React.Component {
     const { cardName, cardDescription,
       cardAttr1, cardAttr2, cardAttr3, cardImage, cardRare,
       cardTrunfo, hasTrunfo, isSaveButtonDisabled, savedCards,
-      nameFilter, rareFilter } = this.state;
+      nameFilter, rareFilter, trunfoFilter, disabled } = this.state;
 
     const filteredName = savedCards.filter((card) => (
       card.cardName.includes(nameFilter)));
     const filteredRare = filteredName.filter((card) => (
       card.cardRare === rareFilter || rareFilter === 'todas'));
+    const filteredTrunfo = savedCards.filter((card) => card.cardTrunfo === true);
+
+    const filter = trunfoFilter ? filteredTrunfo : filteredRare;
 
     return (
       <div>
@@ -144,11 +157,13 @@ class App extends React.Component {
           <Filters
             nameFilter={ nameFilter }
             rareFilter={ rareFilter }
+            trunfoFilter={ trunfoFilter }
+            disabled={ disabled }
             onInputChange={ this.onInputChange }
           />
           <div className="deck">
             {
-              filteredRare.map((card, index) => (
+              filter.map((card, index) => (
                 <Card
                   key={ index }
                   cardName={ card.cardName }
